@@ -10,6 +10,7 @@ public class WarehouseCalloutService implements Queueable, Database.AllowsCallou
     }
 
     public void execute(QueueableContext context) {
+        System.debug('excec');
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint('https://th-superbadge-apex.herokuapp.com/equipment?_ga=2.142830517.1245583649.1619798612-1941109483.1610589604');
@@ -20,7 +21,7 @@ public class WarehouseCalloutService implements Queueable, Database.AllowsCallou
             // Deserializes the JSON string into collections of primitive data types.
             System.debug(response.getBody());
             List<Product> result = (List<Product>)JSON.deserialize(response.getBody(), List<Product>.class);
-            // Cast the values in the 'animals' key as a list
+
             System.debug(result);
             Map<String,Product2> equipmentToUpsert = new Map<String,Product2>();
             List<String> extIds = new List<String>();
